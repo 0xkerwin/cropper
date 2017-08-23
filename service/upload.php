@@ -1,7 +1,14 @@
 <?php
 $image = $_FILES['file']['tmp_name'];
-$extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-$file_path = '../upload/'.time().'.jpg';
+$base_path = '../upload/';
+
+if(!is_dir($base_path)){
+    if(!mkdir($base_path,0777,true)){
+        echo json_encode(['status' => 0, 'msg' => '上传目录创建失败']);exit;
+    }
+}
+
+$file_path = $base_path.time().'.jpg';
 $dir = move_uploaded_file($image, $file_path);
 
 if ($dir) {
@@ -12,5 +19,5 @@ if ($dir) {
 	$msg = '上传失败';
 }
 
-echo json_encode(['status' => $status, 'msg' => $msg]);exit
+echo json_encode(['status' => $status, 'msg' => $msg]);exit;
  ?>
