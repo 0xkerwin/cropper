@@ -1,4 +1,5 @@
 <?php
+$extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 $image = $_FILES['file']['tmp_name'];
 $base_path = '../upload/';
 
@@ -8,7 +9,7 @@ if(!is_dir($base_path)){
     }
 }
 
-$file_path = $base_path.time().'.jpg';
+$file_path = $base_path.time().'.'.$extension;
 $dir = move_uploaded_file($image, $file_path);
 
 if ($dir) {

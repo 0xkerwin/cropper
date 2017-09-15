@@ -137,7 +137,7 @@
 		$("#submit").click(function(){
 			var Blob= getBlobBydataURI(imgurl,'image/jpeg');  
             var formData = new FormData();  
-            formData.append('file', Blob);
+            formData.append('file', Blob, Date.parse(new Date())+".jpg");
 
             $.ajax({
 				url: 'service/upload.php',
